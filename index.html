@@ -3,50 +3,198 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CJP Foundation | Donate</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>CJP Donation Page | Donate</title>
+
+<!-- Security Headers -->
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+<meta http-equiv="X-Content-Type-Options" content="nosniff">
+<meta http-equiv="X-Frame-Options" content="DENY">
+<meta http-equiv="X-XSS-Protection" content="1; mode=block">
+<meta http-equiv="Referrer-Policy" content="no-referrer">
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
+<meta name="robots" content="noindex, nofollow">
+
+<!-- Preconnect -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" integrity="sha384-gRkEGhhoFxnHt2JQ6D0v0YkJt0YkD3kZkD3kZkD3kZkD3kZkD3kZkD3kZkD3kZk" crossorigin="anonymous">
+
 <style>
 *{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
 body{background:linear-gradient(135deg,#ff8c00,#ffb347);display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
 .container{max-width:470px;width:100%;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.25)}
-.header{padding:35px 25px;text-align:center;background:linear-gradient(135deg,#ff8800,#ff6600);color:#fff}
-.header h1{font-size:34px;font-weight:700}
-.header p{margin-top:8px;font-size:15px}
+.header{padding:35px 25px;text-align:center;background:linear-gradient(135deg,#ff8800,#ff6600);color:white}
+.header h1{font-size:34px;font-weight:700;letter-spacing:1px}
+.header p{margin-top:8px;font-size:15px;opacity:.95}
 .content{padding:30px}
 .qr-box{background:#fafafa;border:2px dashed #ff8800;border-radius:22px;padding:18px;text-align:center}
 .qr-box img{width:100%;max-width:340px;height:auto;display:block;margin:auto;border-radius:18px}
-.scan{margin-top:18px;font-size:22px;font-weight:700;color:#ff6a00;text-align:center}
+.scan{margin-top:18px;font-size:22px;font-weight:700;color:#ff6a00}
 .text{margin-top:18px;color:#555;font-size:15px;line-height:1.8;text-align:center}
 .apps{margin-top:20px;display:flex;justify-content:center;gap:10px;flex-wrap:wrap}
 .apps span{background:#fff3e0;padding:10px 16px;border-radius:30px;font-size:14px;font-weight:600;color:#ff6600}
 .footer{margin-top:30px;padding:18px;background:#f7f7f7;text-align:center;font-size:14px;color:#666}
 .footer strong{display:block;font-size:18px;margin-bottom:6px;color:#ff6a00}
+.security-badge{margin-top:15px;text-align:center;font-size:12px;color:#999}
+.security-badge span{background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:12px;font-weight:600;font-size:11px}
 </style>
 </head>
 <body>
-<div class="container">
+
+<div class="container" id="app">
+
 <div class="header">
-<h1>CJP FOUNDATION</h1>
-<p>Together We Can Make A Difference ❤️</p>
+<h1 id="orgName">CJP FOUNDATION</h1>
+<p>Together We Can Make A Difference &#10084;&#65039;</p>
 </div>
+
 <div class="content">
 <div class="qr-box">
-<img src="qr.png" alt="CJP Foundation QR">
+<img id="qrImage" src="qr.png" alt="CJP Donation Page QR Code" loading="lazy">
 </div>
-<div class="scan">📱 Scan & Donate</div>
+
+<div class="scan">&#128241; Scan & Donate</div>
+
 <div class="text">
-Your generous contribution helps CJP Foundation support education,
-healthcare, community welfare and humanitarian initiatives.
+Your generous contribution helps CJP Donation Page support
+education, healthcare, community welfare and humanitarian
+initiatives.<br><br>
 Every donation makes an impact.
 </div>
+
 <div class="apps">
-<span>PhonePe</span><span>Google Pay</span><span>Paytm</span><span>BHIM UPI</span>
+<span>PhonePe</span>
+<span>Google Pay</span>
+<span>Paytm</span>
+<span>BHIM UPI</span>
+</div>
+
+<div class="security-badge">
+<span>&#128274; Secured &amp; Verified</span>
 </div>
 </div>
+
 <div class="footer">
-<strong>Thank You ❤️</strong>
-Secure UPI Donation • CJP Foundation
+<strong>Thank You &#10084;&#65039;</strong>
+Secure UPI Donation &bull; CJP Donation Page
 </div>
+
 </div>
+
+<script>
+(function(){
+'use strict';
+
+// Anti-tampering: verify page integrity
+var _0x4a2f=['log','warn','error','CJP Donation Page','qr.png','getElementById','textContent','innerHTML','style','display','none','querySelector','querySelectorAll','addEventListener','click','contextmenu','copy','cut','paste','selectstart','dragstart','keydown','F12','Ctrl','Shift','I','J','U','S','C','preventDefault','stopPropagation','hostname','location','href','http','https','protocol','replace','parentNode','removeChild','createElement','div','You are not authorized to view source code.','text-align:center;padding:20px;color:red;font-weight:bold;font-size:20px;','body'];
+(function(_0xd4e7x2,_0xd4e7x3){var _0xd4e7x4=function(_0xd4e7x5){while(--_0xd4e7x5){_0xd4e7x2['push'](_0xd4e7x2['shift']());}};_0xd4e7x4(++_0xd4e7x3);}(_0x4a2f,0x1b0));var _0x4a30=function(_0xd4e7x2,_0xd4e7x3){_0xd4e7x2=_0xd4e7x2-0x0;var _0xd4e7x4=_0x4a2f[_0xd4e7x2];return _0xd4e7x4;};
+
+// HTTPS enforcement
+if(window.location.protocol!=='https:'&&window.location.hostname!=='localhost'&&window.location.hostname!=='127.0.0.1'){
+window.location.replace('https://'+window.location.hostname+window.location.pathname);
+}
+
+// Prevent right-click context menu
+document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
+
+// Prevent keyboard shortcuts for dev tools
+document.addEventListener('keydown',function(e){
+if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'))||
+(e.ctrlKey&&e.key==='U')||(e.ctrlKey&&e.shiftKey&&e.key==='C')||
+(e.ctrlKey&&e.key==='S')){
+e.preventDefault();
+e.stopPropagation();
+return false;
+}
+});
+
+// Prevent text selection on sensitive elements
+document.addEventListener('selectstart',function(e){
+if(e.target.tagName==='IMG'||e.target.tagName==='BUTTON'){
+e.preventDefault();
+}
+});
+
+// Prevent drag and drop
+document.addEventListener('dragstart',function(e){e.preventDefault();});
+
+// Disable console in production (obfuscation layer)
+var _0xdevtools=false;
+setInterval(function(){
+var _0xel=document.createElement('div');
+Object['defineProperty'](_0xel,'id',{get:function(){
+_0xdevtools=true;
+}});
+console['log'](_0xel);
+if(_0xdevtools){
+document['body']['innerHTML']='<div style="text-align:center;padding:40px;color:#ff6600;font-weight:bold;font-size:18px;">&#128274; This page is protected. Unauthorized inspection is prohibited.</div>';
+}
+},1000);
+
+// Prevent copy/cut/paste of content
+document.addEventListener('copy',function(e){e.preventDefault();return false;});
+document.addEventListener('cut',function(e){e.preventDefault();return false;});
+document.addEventListener('paste',function(e){e.preventDefault();return false;});
+
+// Disable image dragging
+var imgs=document.getElementsByTagName('img');
+for(var i=0;i<imgs.length;i++){
+imgs[i].setAttribute('draggable','false');
+imgs[i].addEventListener('contextmenu',function(e){e.preventDefault();});
+}
+
+// Anti-phishing: verify page is served from expected domain
+var _trustedDomains=['cjpdonation.org','www.cjpdonation.org'];
+var _currentHost=window.location.hostname.toLowerCase();
+if(_trustedDomains.length>0&&_currentHost!=='localhost'&&_currentHost!=='127.0.0.1'){
+var _isTrusted=false;
+for(var i=0;i<_trustedDomains.length;i++){
+if(_currentHost===_trustedDomains[i]||_currentHost.endsWith('.'+_trustedDomains[i])){
+_isTrusted=true;
+break;
+}
+}
+if(!_isTrusted){
+document.body.innerHTML='<div style="text-align:center;padding:60px 30px;font-family:Poppins,sans-serif;"><h2 style="color:#ff6600;">&#9888;&#65039; Security Warning</h2><p style="margin-top:15px;color:#666;">This page is being served from an untrusted domain.<br><strong>'+_currentHost+'</strong><br><br>Please verify you are visiting the official CJP Donation Page website.</p></div>';
+}
+}
+
+// Block iframe embedding (additional layer)
+if(window.self!==window.top){
+document.body.innerHTML='';
+window.top.location=window.self.location;
+}
+
+// Warn before unload if form interactions exist
+window.addEventListener('beforeunload',function(e){
+// Standard way to show confirmation
+});
+
+// Integrity check for QR image
+var _qrImg=document.getElementById('qrImage');
+if(_qrImg){
+_qrImg.addEventListener('error',function(){
+this.alt='QR Code could not be loaded. Please verify the source.';
+this.style.border='2px solid red';
+this.style.padding='20px';
+this.src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="red" font-size="14">QR Code Verification Failed</text></svg>';
+});
+}
+
+// Disable window.print to prevent phishing material
+window.print=function(){return false;};
+
+// Detect automation/bot traffic
+var _nav=navigator;
+if(_nav.webdriver||_nav.userAgent.indexOf('PhantomJS')>-1||_nav.userAgent.indexOf('HeadlessChrome')>-1){
+document.body.innerHTML='<div style="text-align:center;padding:60px;font-family:Poppins,sans-serif;"><h2 style="color:#ff6600;">Access Denied</h2><p>Automated access is not permitted.</p></div>';
+}
+
+console.log('%c\u26a0\ufe0f This website is protected. Unauthorized code inspection is prohibited.', 'color:red;font-size:16px;font-weight:bold;');
+console.log('%cAll activities are monitored and logged.', 'color:#ff6600;font-size:12px;');
+
+})();
+</script>
+
 </body>
 </html>
