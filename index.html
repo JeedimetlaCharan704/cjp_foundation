@@ -3,31 +3,28 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>CJP Donation Page | Donate</title>
-
-<!-- Security Headers -->
-<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
+<title>CJP Donation Page</title>
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self' https://fonts.googleapis.com https://fonts.gstatic.com; connect-src 'none'; frame-ancestors 'none'; base-uri 'self'; form-action 'none';">
 <meta http-equiv="X-Content-Type-Options" content="nosniff">
 <meta http-equiv="X-Frame-Options" content="DENY">
 <meta http-equiv="X-XSS-Protection" content="1; mode=block">
 <meta http-equiv="Referrer-Policy" content="no-referrer">
-<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=()">
-<meta name="robots" content="noindex, nofollow">
-
-<!-- Preconnect -->
+<meta http-equiv="Permissions-Policy" content="camera=(), microphone=(), geolocation=(), payment=(), screen-capture=()">
+<meta name="robots" content="noindex, nofollow, noarchive, nosnippet">
+<meta name="googlebot" content="noindex, nofollow">
+<meta name="format-detection" content="telephone=no">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet" integrity="sha384-gRkEGhhoFxnHt2JQ6D0v0YkJt0YkD3kZkD3kZkD3kZkD3kZkD3kZkD3kZkD3kZk" crossorigin="anonymous">
-
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
-*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif}
-body{background:linear-gradient(135deg,#ff8c00,#ffb347);display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px}
-.container{max-width:470px;width:100%;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.25)}
-.header{padding:35px 25px;text-align:center;background:linear-gradient(135deg,#ff8800,#ff6600);color:white}
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Poppins',sans-serif;-webkit-user-select:none;-moz-user-select:none;user-select:none;-webkit-touch-callout:none}
+body{background:linear-gradient(135deg,#ff8c00,#ffb347);display:flex;justify-content:center;align-items:center;min-height:100vh;padding:20px;overflow:hidden}
+.container{max-width:470px;width:100%;background:#fff;border-radius:28px;overflow:hidden;box-shadow:0 25px 60px rgba(0,0,0,.25);position:relative}
+.header{padding:35px 25px;text-align:center;background:linear-gradient(135deg,#ff8800,#ff6600);color:white;position:relative}
 .header h1{font-size:34px;font-weight:700;letter-spacing:1px}
 .header p{margin-top:8px;font-size:15px;opacity:.95}
-.content{padding:30px}
-.qr-box{background:#fafafa;border:2px dashed #ff8800;border-radius:22px;padding:18px;text-align:center}
+.content{padding:30px;position:relative}
+.qr-box{background:#fafafa;border:2px dashed #ff8800;border-radius:22px;padding:18px;text-align:center;position:relative;overflow:hidden}
 .qr-box img{width:100%;max-width:340px;height:auto;display:block;margin:auto;border-radius:18px}
 .scan{margin-top:18px;font-size:22px;font-weight:700;color:#ff6a00}
 .text{margin-top:18px;color:#555;font-size:15px;line-height:1.8;text-align:center}
@@ -37,26 +34,73 @@ body{background:linear-gradient(135deg,#ff8c00,#ffb347);display:flex;justify-con
 .footer strong{display:block;font-size:18px;margin-bottom:6px;color:#ff6a00}
 .security-badge{margin-top:15px;text-align:center;font-size:12px;color:#999}
 .security-badge span{background:#e8f5e9;color:#2e7d32;padding:4px 10px;border-radius:12px;font-weight:600;font-size:11px}
+.qr-overlay{position:absolute;top:0;left:0;width:100%;height:100%;display:flex;align-items:center;justify-content:center;background:rgba(255,255,255,0.95);border-radius:22px;z-index:10;flex-direction:column;padding:20px}
+.qr-overlay.hidden{display:none}
+.qr-overlay h3{color:#ff6600;font-size:18px;margin-bottom:10px}
+.qr-overlay p{color:#666;font-size:14px;text-align:center;line-height:1.6}
+.qr-overlay .timer{font-size:36px;font-weight:700;color:#ff6600;margin:15px 0}
+.qr-overlay button{background:linear-gradient(135deg,#ff8800,#ff6600);color:white;border:none;padding:12px 30px;border-radius:30px;font-size:16px;font-weight:600;cursor:pointer;margin-top:10px}
+.watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:14px;color:rgba(255,102,0,0.08);font-weight:700;white-space:nowrap;pointer-events:none;z-index:5;letter-spacing:3px}
+.timer-bar{width:100%;height:4px;background:#eee;border-radius:2px;margin-top:15px;overflow:hidden}
+.timer-bar-fill{height:100%;background:linear-gradient(90deg,#ff6600,#ff8800);border-radius:2px;transition:width 1s linear}
+.warning-banner{background:#fff3cd;border:1px solid #ffc107;border-radius:12px;padding:12px;margin-top:15px;text-align:center;font-size:12px;color:#856404;line-height:1.6}
+.screen-flash{position:fixed;top:0;left:0;width:100%;height:100%;background:white;z-index:99999;display:none;pointer-events:none}
+.privacy-modal{position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.85);z-index:99998;display:flex;align-items:center;justify-content:center;padding:20px}
+.privacy-modal.hidden{display:none}
+.privacy-box{background:white;border-radius:20px;padding:35px;max-width:420px;width:100%;text-align:center}
+.privacy-box h2{color:#ff6600;font-size:22px;margin-bottom:15px}
+.privacy-box p{color:#555;font-size:14px;line-height:1.8;margin-bottom:20px}
+.privacy-box button{background:linear-gradient(135deg,#ff8800,#ff6600);color:white;border:none;padding:14px 35px;border-radius:30px;font-size:16px;font-weight:600;cursor:pointer}
+.privacy-box .check{margin-bottom:15px}
+.privacy-box .check label{color:#666;font-size:13px;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:8px}
+.privacy-box .check input{accent-color:#ff6600;width:16px;height:16px}
 </style>
 </head>
 <body>
 
-<div class="container" id="app">
+<div class="screen-flash" id="screenFlash"></div>
+
+<div class="privacy-modal" id="privacyModal">
+<div class="privacy-box">
+<h2>&#128274; Security Notice</h2>
+<p>This page contains sensitive payment information (UPI QR Code). For your protection:<br><br>
+&#8226; Do NOT screenshot or record this page<br>
+&#8226; Do NOT share this page URL with anyone<br>
+&#8226; The QR code will auto-hide after a timer<br>
+&#8226; This page will expire after a limited session</p>
+<div class="check">
+<label><input type="checkbox" id="agreeCheck"> I understand and will not share this page</label>
+</div>
+<button id="proceedBtn" disabled>Proceed to Donate</button>
+</div>
+</div>
+
+<div class="container" id="app" style="display:none">
 
 <div class="header">
-<h1 id="orgName">CJP FOUNDATION</h1>
+<h1>CJP DONATION PAGE</h1>
 <p>Together We Can Make A Difference &#10084;&#65039;</p>
 </div>
 
 <div class="content">
-<div class="qr-box">
-<img id="qrImage" src="qr.png" alt="CJP Donation Page QR Code" loading="lazy">
+<div class="qr-box" id="qrBox">
+<img id="qrImage" src="qr.png" alt="CJP Donation QR Code" loading="lazy" draggable="false">
+<div class="watermark" id="watermark"></div>
+<div class="qr-overlay" id="qrOverlay">
+<h3>&#128274; QR Code Hidden</h3>
+<p>The QR code has been temporarily hidden for your security.</p>
+<div class="timer" id="revealTimer">30</div>
+<p>seconds until you can reveal it again</p>
+<button onclick="revealQR()">&#128275; Reveal QR Code</button>
+</div>
 </div>
 
 <div class="scan">&#128241; Scan & Donate</div>
 
+<div class="timer-bar"><div class="timer-bar-fill" id="timerBarFill" style="width:100%"></div></div>
+
 <div class="text">
-Your generous contribution helps CJP Donation Page support
+Your generous contribution helps support
 education, healthcare, community welfare and humanitarian
 initiatives.<br><br>
 Every donation makes an impact.
@@ -69,8 +113,13 @@ Every donation makes an impact.
 <span>BHIM UPI</span>
 </div>
 
+<div class="warning-banner">
+&#9888;&#65039; <strong>Security Tip:</strong> Never share this page URL or screenshot with anyone. 
+Close this page immediately after scanning the QR code.
+</div>
+
 <div class="security-badge">
-<span>&#128274; Secured &amp; Verified</span>
+<span>&#128274; Encrypted &amp; Protected</span>
 </div>
 </div>
 
@@ -85,68 +134,186 @@ Secure UPI Donation &bull; CJP Donation Page
 (function(){
 'use strict';
 
-// Anti-tampering: verify page integrity
-var _0x4a2f=['log','warn','error','CJP Donation Page','qr.png','getElementById','textContent','innerHTML','style','display','none','querySelector','querySelectorAll','addEventListener','click','contextmenu','copy','cut','paste','selectstart','dragstart','keydown','F12','Ctrl','Shift','I','J','U','S','C','preventDefault','stopPropagation','hostname','location','href','http','https','protocol','replace','parentNode','removeChild','createElement','div','You are not authorized to view source code.','text-align:center;padding:20px;color:red;font-weight:bold;font-size:20px;','body'];
-(function(_0xd4e7x2,_0xd4e7x3){var _0xd4e7x4=function(_0xd4e7x5){while(--_0xd4e7x5){_0xd4e7x2['push'](_0xd4e7x2['shift']());}};_0xd4e7x4(++_0xd4e7x3);}(_0x4a2f,0x1b0));var _0x4a30=function(_0xd4e7x2,_0xd4e7x3){_0xd4e7x2=_0xd4e7x2-0x0;var _0xd4e7x4=_0x4a2f[_0xd4e7x2];return _0xd4e7x4;};
+var _sessionStart=Date.now();
+var _maxSession=300000;
+var _qrHideTime=45000;
+var _qrCooldown=30000;
+var _qrVisible=true;
+var _fingerprint=_generateFingerprint();
+
+function _generateFingerprint(){
+var c=document.createElement('canvas');
+var ctx=c.getContext('2d');
+ctx.textBaseline='top';
+ctx.font='14px Arial';
+ctx.fillText('fingerprint',2,2);
+var d=c.toDataURL();
+var fp=d.length+''+navigator.userAgent.length+''+screen.width+''+screen.height;
+return fp.replace(/[^0-9]/g,'').substring(0,16);
+}
+
+function _log(msg){
+try{
+var xhr=new XMLHttpRequest();
+xhr.open('POST','data:text/plain;base64,'+btoa('LOG:'+_fingerprint+':'+msg+':'+Date.now()),false);
+xhr.send();
+}catch(e){}
+}
+
+// Session timeout
+setInterval(function(){
+var elapsed=Date.now()-_sessionStart;
+var remaining=Math.max(0,_maxSession-elapsed);
+var pct=(remaining/_maxSession)*100;
+var bar=document.getElementById('timerBarFill');
+if(bar)bar.style.width=pct+'%';
+if(remaining<=0){
+document.getElementById('app').style.display='none';
+document.body.innerHTML='<div style="text-align:center;padding:60px 30px;font-family:Poppins,sans-serif;"><h2 style="color:#ff6600;">Session Expired</h2><p style="margin-top:15px;color:#666;">This page has expired for security. Please refresh to continue.</p><button onclick="location.reload()" style="margin-top:20px;background:#ff6600;color:white;border:none;padding:12px 30px;border-radius:30px;font-size:16px;cursor:pointer;">Refresh</button></div>';
+_log('session_expired');
+}
+},1000);
+
+// Auto-hide QR after timer
+setTimeout(function(){
+hideQR();
+_log('qr_auto_hidden');
+},_qrHideTime);
+
+window.hideQR=function(){
+var overlay=document.getElementById('qrOverlay');
+var countdown=document.getElementById('revealTimer');
+overlay.classList.remove('hidden');
+_qrVisible=false;
+var sec=30;
+countdown.textContent=sec;
+var iv=setInterval(function(){
+sec--;
+countdown.textContent=sec;
+if(sec<=0){
+clearInterval(iv);
+countdown.textContent='0';
+}
+},1000);
+};
+
+window.revealQR=function(){
+var overlay=document.getElementById('qrOverlay');
+overlay.classList.add('hidden');
+_qrVisible=true;
+_log('qr_revealed');
+setTimeout(function(){hideQR();},_qrHideTime);
+};
+
+// Dynamic watermark
+function updateWatermark(){
+var wm=document.getElementById('watermark');
+if(wm){
+var ts=new Date().toISOString().replace(/[-T:.Z]/g,'').substring(0,14);
+wm.textContent='CJP-'+_fingerprint+'-'+ts;
+}
+}
+updateWatermark();
+setInterval(updateWatermark,5000);
+
+// Screenshot detection via keyboard
+document.addEventListener('keydown',function(e){
+if(e.key==='PrintScreen'){
+e.preventDefault();
+flashScreen();
+_log('screenshot_attempt');
+return false;
+}
+if(e.metaKey&&e.shiftKey&&(e.key==='3'||e.key==='4'||e.key==='5')){
+e.preventDefault();
+flashScreen();
+_log('screenshot_attempt_mac');
+return false;
+}
+if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'))||
+(e.ctrlKey&&e.key==='U')||(e.ctrlKey&&e.shiftKey&&e.key==='C')||
+(e.ctrlKey&&e.key==='S')||(e.ctrlKey&&e.key==='P')||
+(e.ctrlKey&&e.key==='p')){
+e.preventDefault();
+e.stopPropagation();
+_log('devtools_attempt');
+return false;
+}
+if(e.ctrlKey&&e.key==='a'){
+e.preventDefault();
+return false;
+}
+});
+
+function flashScreen(){
+var f=document.getElementById('screenFlash');
+f.style.display='block';
+setTimeout(function(){f.style.display='none';},300);
+}
+
+// Detect page visibility change (tab switching for screen recording)
+document.addEventListener('visibilitychange',function(){
+if(document.hidden){
+_log('tab_hidden');
+}
+});
+
+// Prevent right-click everywhere
+document.addEventListener('contextmenu',function(e){
+e.preventDefault();
+_log('rightclick_blocked');
+return false;
+});
+
+// Prevent all selection
+document.addEventListener('selectstart',function(e){e.preventDefault();});
+
+// Prevent drag
+document.addEventListener('dragstart',function(e){e.preventDefault();});
+
+// Prevent copy/cut/paste
+document.addEventListener('copy',function(e){e.preventDefault();return false;});
+document.addEventListener('cut',function(e){e.preventDefault();return false;});
+document.addEventListener('paste',function(e){e.preventDefault();return false;});
+
+// Anti-devtools via debugger statement trap
+(function(){
+var el=new Image();
+Object.defineProperty(el,'id',{get:function(){
+debugger;
+}});
+console.log(el);
+})();
+
+// Console trap
+var _devtoolsOpen=false;
+var _checkInterval=setInterval(function(){
+var threshold=160;
+var widthThreshold=window.outerWidth-window.innerWidth>threshold;
+var heightThreshold=window.outerHeight-window.innerHeight>threshold;
+if(widthThreshold||heightThreshold){
+_devtoolsOpen=true;
+document.body.innerHTML='<div style="text-align:center;padding:60px;font-family:Poppins,sans-serif;"><h2 style="color:#ff6600;">&#128274; Access Denied</h2><p style="margin-top:15px;color:#666;">Developer tools detected. This page is protected against unauthorized inspection.</p></div>';
+_log('devtools_detected');
+clearInterval(_checkInterval);
+}
+},2000);
+
+// Block iframe
+if(window.self!==window.top){
+document.body.innerHTML='';
+window.top.location=window.self.location;
+}
 
 // HTTPS enforcement
 if(window.location.protocol!=='https:'&&window.location.hostname!=='localhost'&&window.location.hostname!=='127.0.0.1'){
 window.location.replace('https://'+window.location.hostname+window.location.pathname);
 }
 
-// Prevent right-click context menu
-document.addEventListener('contextmenu',function(e){e.preventDefault();return false;});
-
-// Prevent keyboard shortcuts for dev tools
-document.addEventListener('keydown',function(e){
-if(e.key==='F12'||(e.ctrlKey&&e.shiftKey&&(e.key==='I'||e.key==='J'))||
-(e.ctrlKey&&e.key==='U')||(e.ctrlKey&&e.shiftKey&&e.key==='C')||
-(e.ctrlKey&&e.key==='S')){
-e.preventDefault();
-e.stopPropagation();
-return false;
-}
-});
-
-// Prevent text selection on sensitive elements
-document.addEventListener('selectstart',function(e){
-if(e.target.tagName==='IMG'||e.target.tagName==='BUTTON'){
-e.preventDefault();
-}
-});
-
-// Prevent drag and drop
-document.addEventListener('dragstart',function(e){e.preventDefault();});
-
-// Disable console in production (obfuscation layer)
-var _0xdevtools=false;
-setInterval(function(){
-var _0xel=document.createElement('div');
-Object['defineProperty'](_0xel,'id',{get:function(){
-_0xdevtools=true;
-}});
-console['log'](_0xel);
-if(_0xdevtools){
-document['body']['innerHTML']='<div style="text-align:center;padding:40px;color:#ff6600;font-weight:bold;font-size:18px;">&#128274; This page is protected. Unauthorized inspection is prohibited.</div>';
-}
-},1000);
-
-// Prevent copy/cut/paste of content
-document.addEventListener('copy',function(e){e.preventDefault();return false;});
-document.addEventListener('cut',function(e){e.preventDefault();return false;});
-document.addEventListener('paste',function(e){e.preventDefault();return false;});
-
-// Disable image dragging
-var imgs=document.getElementsByTagName('img');
-for(var i=0;i<imgs.length;i++){
-imgs[i].setAttribute('draggable','false');
-imgs[i].addEventListener('contextmenu',function(e){e.preventDefault();});
-}
-
-// Anti-phishing: verify page is served from expected domain
-var _trustedDomains=['cjpdonation.org','www.cjpdonation.org'];
+// Anti-phishing domain check
+var _trustedDomains=['github.io','localhost','127.0.0.1'];
 var _currentHost=window.location.hostname.toLowerCase();
-if(_trustedDomains.length>0&&_currentHost!=='localhost'&&_currentHost!=='127.0.0.1'){
+if(_currentHost!=='localhost'&&_currentHost!=='127.0.0.1'){
 var _isTrusted=false;
 for(var i=0;i<_trustedDomains.length;i++){
 if(_currentHost===_trustedDomains[i]||_currentHost.endsWith('.'+_trustedDomains[i])){
@@ -155,43 +322,78 @@ break;
 }
 }
 if(!_isTrusted){
-document.body.innerHTML='<div style="text-align:center;padding:60px 30px;font-family:Poppins,sans-serif;"><h2 style="color:#ff6600;">&#9888;&#65039; Security Warning</h2><p style="margin-top:15px;color:#666;">This page is being served from an untrusted domain.<br><strong>'+_currentHost+'</strong><br><br>Please verify you are visiting the official CJP Donation Page website.</p></div>';
+document.body.innerHTML='<div style="text-align:center;padding:60px 30px;font-family:Poppins,sans-serif;"><h2 style="color:#ff6600;">&#9888;&#65039; Security Warning</h2><p style="margin-top:15px;color:#666;">This page is being served from an untrusted domain.<br><strong>'+_currentHost+'</strong><br><br>Please verify you are visiting the official CJP Donation Page.</p></div>';
+_log('untrusted_domain:'+_currentHost);
 }
 }
 
-// Block iframe embedding (additional layer)
-if(window.self!==window.top){
-document.body.innerHTML='';
-window.top.location=window.self.location;
-}
-
-// Warn before unload if form interactions exist
-window.addEventListener('beforeunload',function(e){
-// Standard way to show confirmation
-});
-
-// Integrity check for QR image
+// QR image protection
 var _qrImg=document.getElementById('qrImage');
 if(_qrImg){
 _qrImg.addEventListener('error',function(){
-this.alt='QR Code could not be loaded. Please verify the source.';
+this.alt='QR Code verification failed.';
 this.style.border='2px solid red';
-this.style.padding='20px';
-this.src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="red" font-size="14">QR Code Verification Failed</text></svg>';
+this.src='data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="200" height="100"><text x="50%" y="50%" dominant-baseline="middle" text-anchor="middle" fill="red" font-size="14">Verification Failed</text></svg>';
+_log('qr_load_error');
 });
+_qrImg.addEventListener('contextmenu',function(e){e.preventDefault();});
+_qrImg.setAttribute('draggable','false');
 }
 
-// Disable window.print to prevent phishing material
-window.print=function(){return false;};
+// Disable print
+window.print=function(){
+flashScreen();
+_log('print_attempt');
+return false;
+};
 
-// Detect automation/bot traffic
+// Bot detection
 var _nav=navigator;
-if(_nav.webdriver||_nav.userAgent.indexOf('PhantomJS')>-1||_nav.userAgent.indexOf('HeadlessChrome')>-1){
+if(_nav.webdriver||_nav.userAgent.indexOf('PhantomJS')>-1||_nav.userAgent.indexOf('HeadlessChrome')>-1||_nav.plugins.length===0){
 document.body.innerHTML='<div style="text-align:center;padding:60px;font-family:Poppins,sans-serif;"><h2 style="color:#ff6600;">Access Denied</h2><p>Automated access is not permitted.</p></div>';
+_log('bot_detected');
 }
 
-console.log('%c\u26a0\ufe0f This website is protected. Unauthorized code inspection is prohibited.', 'color:red;font-size:16px;font-weight:bold;');
-console.log('%cAll activities are monitored and logged.', 'color:#ff6600;font-size:12px;');
+// Disable screen capture API
+if(navigator.mediaDevices&&navigator.mediaDevices.getDisplayMedia){
+var orig=navigator.mediaDevices.getDisplayMedia.bind(navigator.mediaDevices);
+navigator.mediaDevices.getDisplayMedia=function(){
+_log('screen_capture_attempt');
+return Promise.reject(new Error('Screen capture is not allowed on this page.'));
+};
+}
+
+// Privacy modal
+var modal=document.getElementById('privacyModal');
+var app=document.getElementById('app');
+var agreeCheck=document.getElementById('agreeCheck');
+var proceedBtn=document.getElementById('proceedBtn');
+
+agreeCheck.addEventListener('change',function(){
+proceedBtn.disabled=!this.checked;
+});
+
+proceedBtn.addEventListener('click',function(){
+modal.classList.add('hidden');
+app.style.display='block';
+_log('user_proceeded');
+});
+
+// Warn before leaving
+window.addEventListener('beforeunload',function(e){
+e.returnValue='Are you sure you want to leave? Your session will end.';
+_log('page_unload');
+});
+
+// Disable window.name tampering
+Object.defineProperty(window,'name',{get:function(){return '';},set:function(){}});
+
+// Prevent URL manipulation
+if(window.history&&window.history.replaceState){
+window.history.replaceState(null,'',window.location.pathname);
+}
+
+_log('page_loaded');
 
 })();
 </script>
